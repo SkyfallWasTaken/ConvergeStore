@@ -39,8 +39,9 @@ class ProductsController < ApplicationController
   end
 
   private
+    # We don't want to allow hackers to edit unallowed things
     def product_params
-      params.expect(product: [ :name ])
+      params.expect(product: [ :name, :description, :image ])
     end
 
     def set_product
