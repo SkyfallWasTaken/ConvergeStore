@@ -16,9 +16,9 @@ touch storage/test.txt && rm storage/test.txt || {
     exit 1
 }
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare db:migrate
-fi
+# Always run database setup
+echo "=== Running database migrations ==="
+./bin/rails db:prepare db:migrate
+echo "=== Database migrations complete ==="
 
 exec "${@}"
