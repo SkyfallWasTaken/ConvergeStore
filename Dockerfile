@@ -62,6 +62,15 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
+
+# Create storage directory and set proper permissions
+RUN mkdir -p storage db && \
+    chown -R rails:rails storage db && \
+    chmod -R 755 storage db
+
+# Also ensure the rails user can write to the parent directory
+RUN chown -R rails:rails /rails
+
 USER 1000:1000
 
 # Entrypoint prepares the database.
