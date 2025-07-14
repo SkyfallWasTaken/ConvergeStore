@@ -2,10 +2,12 @@
 
 <%= link_to "New product", new_product_path if authenticated? %>
 
-<ul>
-    <% @products.each do |product| %>
+<% cache @products do %>
+  <ul>
+      <% @products.each do |product| %>
         <li>
-            <%= link_to product.name, product %>
+          <%= link_to product.name, product %>
         </li>
-    <% end %>
-</ul>
+      <% end %>
+  </ul>
+<% end %>

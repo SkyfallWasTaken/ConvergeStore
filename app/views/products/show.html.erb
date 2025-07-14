@@ -1,4 +1,6 @@
-<%= debug @product %>
+<% cache @product do %>
+  <%= debug @product %>
+<% end %>
 
 <%= link_to "Back", products_path %>
 
