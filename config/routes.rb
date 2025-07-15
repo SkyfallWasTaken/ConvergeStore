@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resource :session
-  resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -17,4 +15,9 @@ Rails.application.routes.draw do
   root "products#index"
 
   resources :products
+
+  resource :session, only: [ :new, :create, :destroy ]
+  get "/auth/:provider/callback", to: "sessions#omniauth"
+  get "/login", to: "sessions#new"
+  delete "/logout", to: "sessions#destroy"
 end
