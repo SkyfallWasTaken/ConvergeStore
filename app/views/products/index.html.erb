@@ -1,13 +1,13 @@
 <h1>Products</h1>
 
-<%= link_to "New product", new_product_path if authenticated? %>
+<%= admin_tool do %>
+  <%= link_to "New product", new_product_path %>
+<% end %>
 
 <% cache @products do %>
-  <ul>
-      <% @products.each do |product| %>
-        <li>
-          <%= link_to product.name, product %>
-        </li>
-      <% end %>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+    <% @products.each do |product| %>
+      <li><%= render "shop_item", product: product %></li>
+    <% end %>
   </ul>
 <% end %>

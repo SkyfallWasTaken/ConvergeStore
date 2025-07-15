@@ -1,0 +1,7 @@
+<%= link_to product do %>
+    <div class="bg-card rounded-md shadow-xs px-4 py-3 h-full hover:shadow-md transition text-center">
+        <p class="text-xl font-bold mb-2"><%= product.name %></p>
+        <%= product.description %>
+        <%= image_tag product.image, class: "rounded-md w-full h-auto object-scale-down aspect-square max-h-48 mt-4" if product.image.attached? %>
+    </div>
+<% end %>
